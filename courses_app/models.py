@@ -16,11 +16,12 @@ class Course(models.Model):
 
     class Meta:
         ordering = ['name']
-        unique_together = (
-            'name',
-            'duration',
-            'price',
-        )
+        """If i have not a front dev """
+        # unique_together = (
+        #     'name',
+        #     'duration',
+        #     'price',
+        # )
 
     def __str__(self):
         return self.name
