@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 from students_app.models import Student
 from students_app.serializers import StudentSerializer
@@ -18,5 +18,7 @@ class StudentView(ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     lookup_field = 'pk'
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['id', 'first_name', 'second_name', 'date_of_birth', 'phone_number', 'email', 'gender', 'course']
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['course']
+    search_fields = ['id', 'first_name', 'second_name']
+    ordering_fields = ['first_name']
