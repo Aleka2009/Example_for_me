@@ -29,7 +29,7 @@ class Student(models.Model):
         choices=GENDER_CHOICES,
         default='-'
                               )
-    course = models.ForeignKey(courses_app.models.Course, on_delete=models.CASCADE)
+    course = models.ManyToManyField(courses_app.models.Course)
 
     class Meta:
         ordering = ['second_name']
