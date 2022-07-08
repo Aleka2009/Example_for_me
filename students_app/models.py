@@ -9,27 +9,11 @@ from django.db import models
 # 	gender
 # 	id_course
 
-import courses_app.models
+from courses_app.models import Course
+from employees_app.models import Communism
 
-
-class Student(models.Model):
-    GENDER_CHOICES = (
-        ('female', 'female'),
-        ('male', 'male'),
-        ('-', '-'),
-                      )
-
-    first_name = models.CharField(max_length=255)
-    second_name = models.CharField(max_length=255)
-    date_of_birth = models.DateField(null=True)
-    phone_number = models.CharField(max_length=255)
-    email = models.EmailField(blank=True, null=True)
-    gender = models.CharField(
-        max_length=20,
-        choices=GENDER_CHOICES,
-        default='-'
-                              )
-    course = models.ManyToManyField(courses_app.models.Course)
+class Student(Communism, models.Model):
+    id_course = models.ManyToManyField(Course)
 
     class Meta:
         ordering = ['second_name']
