@@ -3,7 +3,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 from students_app.models import Student
 from students_app.serializers import StudentSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 """If you have not front-dev or do not want """
 
@@ -14,7 +14,7 @@ class StudentViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = StudentSerializer
 
 
-class StudentView(ModelViewSet):
+class StudentViewSet(ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     lookup_field = 'pk'
