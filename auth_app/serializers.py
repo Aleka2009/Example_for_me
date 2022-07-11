@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from employees_app.models import Employee
 from rest_framework.authtoken.models import Token
+from employees_app.models import Employee
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password',  'confirm_password', 'phone_number']
+        fields = ['id', 'username', 'password', 'confirm_password', 'phone_number', 'email']
 
     def validate(self, attrs):
         attrs = super().validate(attrs)
@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(
             username=validated_data["username"],
             email=validated_data["email"],
-            password=validated_data["password"],
+            password=validated_data["password"]
         )
         Employee.objects.create(
             user=user,
@@ -33,4 +33,4 @@ class UserSerializer(serializers.ModelSerializer):
 
         )
         Token.objects.create(user=user)
-        return User
+        return user

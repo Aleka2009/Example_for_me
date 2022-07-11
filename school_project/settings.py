@@ -41,12 +41,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework.authtoken',
-
     # my apps
     'students_app',
     'courses_app',
     'employees_app',
     'schools_app',
+    'auth_app',
 ]
 
 MIDDLEWARE = [

@@ -6,7 +6,7 @@ from auth_app.serializers import UserSerializer
 class UserRegisterAPIViews(views.APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
