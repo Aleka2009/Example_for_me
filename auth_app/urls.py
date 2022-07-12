@@ -1,9 +1,14 @@
 from django.urls import path
 from auth_app.views import UserRegisterAPIViews
-from rest_framework.authtoken.views import obtain_auth_token
+"""ВРУЧНУЮ"""
+from auth_app.views import LoginView
+
+# from rest_framework.authtoken.views import obtain_auth_token """АВТОМАТИЧЕСКИ"""
 
 
 urlpatterns = [
     path('registration/', UserRegisterAPIViews.as_view(), name='user-registration'),
-    path('login/', obtain_auth_token, name='user-obtain_auth_token'),
+    # path('login/', obtain_auth_token, name='user-obtain_auth_token'), """АВТОМАТИЧЕСКИ"""
+    # Вручную
+    path('login', LoginView.as_view()),
 ]
