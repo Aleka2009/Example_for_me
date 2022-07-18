@@ -6,6 +6,8 @@ from courses_app.serializers import CourseSerializer
 from rest_framework import viewsets
 
 """If you have not front-dev or do not want """
+
+
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     """Information about courses for front_dev"""
     queryset = Course.objects.all()

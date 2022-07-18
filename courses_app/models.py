@@ -20,7 +20,7 @@ class Course(models.Model):
     duration = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
     is_active = models.BooleanField(default=True)
-    id_school = models.ForeignKey(School, on_delete=models.CASCADE)
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
     max_student = models.PositiveIntegerField()
     type_of_education = models.CharField(
         max_length=20,

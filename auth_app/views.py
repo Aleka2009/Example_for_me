@@ -1,16 +1,16 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import views, response, status
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from django.contrib.auth.hashers import check_password
 from auth_app.models import MyUser
-from auth_app.serializers import UserSerializer
+from auth_app.serializers import UserSerializer, LoginSerializer
 
 
-class UserRegisterAPIViews(views.APIView):
-    permission_classes = [AllowAny]
-
+class UserRegisterAPIViews(APIView):
+    @swagger_auto_schema(request_body=UserSerializer)
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -23,17 +23,18 @@ class UserRegisterAPIViews(views.APIView):
 
 
 class LoginView(APIView):
-
+    @swagger_auto_schema(request_body=LoginSerializer)
     def post(self, request, *args, **kwargs):
-        login = request.data.get('username')
-        if not MyUser.objects.filter(username=login).exists():
+        login = request.data.get('email')
+        if not MyUser.objects.filter(email=login):
             return Response(
-                f'{login} - does not exists'
+                {f'{login} - does not exists'}
             )
-        user = MyUser.objects.get(username=login)
+        user = MyUser.objects.get(email=login)
         password = request.data.get('password')
         pass_check = user.check_password(password)
         if not pass_check:
-            return Response('login or password incorrect')
+            return Response({'email or password incorrect'})
         token = Token.objects.get(user=user)
         return Response({'token': str(token.key)})
+

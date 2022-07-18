@@ -28,7 +28,7 @@ class PositionViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PositionSerializer
     lookup_field = 'pk'
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['id_department']
+    filterset_fields = ['department']
     search_fields = ['id', 'name']
     ordering_fields = ['name']
 
